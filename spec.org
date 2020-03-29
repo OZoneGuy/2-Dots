@@ -17,7 +17,8 @@ There are three specified game types:
 - Moves:
   - The player has a limited number of moves before the game is over. During which he have to score a set score else he loses.
 
-* Board Module
+* DONE Board Module
+  CLOSED: [2020-03-29 Sun 00:47]
 
 ** Template Module
    BoardT
@@ -36,13 +37,13 @@ There are three specified game types:
     BoardT = ?
 
 *** Exported Access Program
-   | Routine name | In                                           | Out    | Exception                 |
-   | /            | <>                                           | <>     | <                         |
-   |--------------+----------------------------------------------+--------+---------------------------|
-   | BoardT       | GameState                                    | BoardT |                           |
-   | consume      | set(tuple(i: $\mathbb{N}$, j: $\mathbb{N}$)) |        | IndexOutOfBoundsException |
-   | updateBoard  |                                              |        |                           |
-   | getCell      | $\mathbb{N}$, $\mathbb{N}$                   | Colour | IndexOutOfBoundsException |
+   | Routine name | In                                           | Out    | Exception                                           |
+   | /            | <>                                           | <>     | <                                                   |
+   |--------------+----------------------------------------------+--------+-----------------------------------------------------|
+   | BoardT       | GameState                                    | BoardT |                                                     |
+   | consume      | set(tuple(i: $\mathbb{N}$, j: $\mathbb{N}$)) |        | IndexOutOfBoundsException, IllegalArgumentException |
+   | updateBoard  |                                              |        |                                                     |
+   | getCell      | $\mathbb{N}$, $\mathbb{N}$                   | Colour | IndexOutOfBoundsException                           |
 
 *** Semantics
 
@@ -75,7 +76,7 @@ There are three specified game types:
        + Coordinates are entries in the 2D array.
        + Down means that the object moves to the row below. If an object is at s[i][j], where $i \neq 0$ then moving down will put it at s[i-1][j].
      + output: None
-     + Exception: $exc:= \exists c: c \in set \bullet ¬ (0 \leq c.i < SIZE \land 0\leq c.j < SIZE) \implies IndexOutOfBoundsException$
+     + Exception: $exc:= \exists c: c \in set \bullet ¬ (0 \leq c.i < SIZE \land 0\leq c.j < SIZE) \implies IndexOutOfBoundsException$ | $\lnot \forall i, j ,k, l : i, j, k, l \in \mathbb{N} \land i < SIZE \land j < SIZE \land k < SIZE \land l < SIZE \bullet b[i][j] = b[k][l]$
 
      updateBoard()
      + transition: All non-null cells are moved "down". Finally the remaining ~Null~ cells are set to different colours.
@@ -221,7 +222,8 @@ There are three specified game types:
      + Exception: None
 
 **** Local Functions
-* Game State Module
+* DONE Game State Module
+  CLOSED: [2020-03-29 Sun 00:47]
 
 ** Interface
    GameState
@@ -237,13 +239,13 @@ There are three specified game types:
     State = {Win, Lose, Running}
 
 *** Exported Access Program
-    | Routine name | In                               | Out          | Exception |
-    | /            | <>                               | <>           | <         |
-    |--------------+----------------------------------+--------------+-----------|
-    | update       |                                  |              |           |
-    | update       | $tuple(n:\mathbb{N}, c: Colour)$ |              |           |
-    | state        |                                  | State        |           |
-    | running      |                                  | $\mathbb{B}$ |           |
+    | Routine name | In                   | Out          | Exception |
+    | /            | <>                   | <>           | <         |
+    |--------------+----------------------+--------------+-----------|
+    | update       |                      |              |           |
+    | update       | $\mathbb{N}, Colour$ |              |           |
+    | state        |                      | State        |           |
+    | running      |                      | $\mathbb{B}$ |           |
 
 *** Semantics
 **** State Variables
@@ -322,8 +324,8 @@ There are three specified game types:
      - output: None
      - Exception: None
 
-     update(t)
-     - transition: $paused, score, curTime, state := False, score + calcScore(t), sysTime, (endTime > curTime \implies Running | endTime \leq curTime \implies (score < scoreGoal \implies Lose | True \implies Win))$
+     update(n, c)
+     - transition: $paused, score, curTime, state := False, score + calcScore(n, c), sysTime, (endTime > curTime \implies Running | endTime \leq curTime \implies (score < scoreGoal \implies Lose | True \implies Win))$
      - output: None
      - Exception: None
 
@@ -354,7 +356,7 @@ There are three specified game types:
 
 **** Local Functions
 
-     calcScore: $tuple(n: \mathbb{N}, c: Colour) \rightarrow \mathbb{N}$ \\
+     calcScore: $\mathbb{N} \times Colour \rightarrow \mathbb{N}$ \\
      $calcScore t = ?$
 * State Score Module
 ** Template Module Inherits GameState
@@ -403,8 +405,8 @@ There are three specified game types:
      + output: None
      + Exception: None
 
-     update(t)
-     + transition: $score, state := score + calcScore(t), (score \geq scoreGoal \implies Win | True \implies Running)$
+     update(n, c)
+     + transition: $score, state := score + calcScore(n, c), (score \geq scoreGoal \implies Win | True \implies Running)$
      + output: None
      + Exception: None
 
@@ -420,7 +422,7 @@ There are three specified game types:
 
 **** Local Functions
 
-     calcScore: $tuple(n: \mathbb{N}, c: Colour) \rightarrow \mathbb{N}$ \\
+     calcScore: $\mathbb{N} \times Colour \rightarrow \mathbb{N}$ \\
      $calcScore t = ?$
 * State Moves Module
 
@@ -480,9 +482,8 @@ There are three specified game types:
      + output: None
      + Exception: None
 
-     update(i)
-     + transition: $moves, score, state := moves + 1, sco$
-     + transition: $moves, score, state := moves + 1, score + calcScore(t), (maxMoves > moves \implies Running | maxMoves \leq moves \implies (score \geq scoreGoal \implies Win|True \implies Lose))$
+     update(n, c)
+     + transition: $moves, score, state := moves + 1, score + calcScore(n, c), (maxMoves > moves \implies Running | maxMoves \leq moves \implies (score \geq scoreGoal \implies Win|True \implies Lose))$
 
      getScore()
      - transition:
@@ -501,5 +502,5 @@ There are three specified game types:
 
 **** Local Functions
 
-     calcScore: $tuple(n: \mathbb{N}, c: Colour) \rightarrow \mathbb{N}$ \\
+     calcScore: $\mathbb{N} \times Colour) \rightarrow \mathbb{N}$ \\
      $calcScore t = ?$
