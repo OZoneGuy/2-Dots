@@ -38,4 +38,8 @@ public abstract class GameState {
     public boolean running(){
         return state == State.RUNNING;
     }
+
+    protected int calcScore(int n, BoardT.Colour c){
+        return (int) Math.pow(2, n - 1);
+    }
 }
