@@ -294,7 +294,7 @@ There are three specified game types:
 | getScore     |                            | $\mathbb{N}$ |           |
 | getRemTime   |                            | $\mathbb{R}$ |           |
 | pause        |                            |              |           |
-| continue     |                            |              |           |
+| unPause      |                            |              |           |
 | isPaused     |                            | $\mathbb{B}$ |           |
 
 *** Semantics
@@ -349,7 +349,7 @@ There are three specified game types:
      - output: $out := endTime - curTime$
      - Exception: None
 
-     continue()
+     unPause()
      - transition: $paused := False$
      - output: None
      - Exception: None
