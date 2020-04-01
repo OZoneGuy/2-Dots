@@ -17,6 +17,7 @@ There are three specified game types:
 - Moves:
   - The player has a limited number of moves before the game is over. During which he have to score a set score else he loses.
 
+\newpage
 * DONE Board Module
   CLOSED: [2020-03-29 Sun 00:47]
 
@@ -88,7 +89,8 @@ There are three specified game types:
      + output: $out := b[i][j]$
      + Exception: $exc := ¬ (0 \leq i < SIZE \land 0 \leq j < SIZE) \implies IndexOutOfBoundsException$
 
-* Controller Module
+\newpage
+* TODO Controller Module
 ** Abstract Object Module
    Controller
 ** Uses
@@ -127,7 +129,9 @@ There are three specified game types:
 **** Access Routine Semantics
 **** Local Functions
 
-* View Module
+
+\newpage
+* NEXT View Module
 ** Abstract Object Module
    View
 ** Uses
@@ -222,6 +226,9 @@ There are three specified game types:
      + Exception: None
 
 **** Local Functions
+
+
+\newpage
 * DONE Game State Module
   CLOSED: [2020-03-29 Sun 00:47]
 
@@ -262,7 +269,10 @@ There are three specified game types:
      + transition: None
      + output: $out := state = Running$
      + Exception: None
-* State Timer Module
+
+\newpage
+* DONE State Timer Module
+  CLOSED: [2020-03-31 Tue 19:14] SCHEDULED: <2020-03-30 Mon>
 ** Template Module inherits GameState
    StateTime
 
@@ -358,7 +368,10 @@ There are three specified game types:
 
      calcScore: $\mathbb{N} \times Colour \rightarrow \mathbb{N}$ \\
      $calcScore t = ?$
-* State Score Module
+
+\newpage
+* DONE State Score Module
+  CLOSED: [2020-03-31 Tue 19:14] SCHEDULED: <2020-03-30 Mon>
 ** Template Module Inherits GameState
    StateScore
 ** Uses
@@ -381,6 +394,7 @@ There are three specified game types:
 *** Semantics
 
 **** State Variables
+
      $score: \mathbb{N}$
 
      $scoreGoal: \mathbb{N}$
@@ -424,7 +438,10 @@ There are three specified game types:
 
      calcScore: $\mathbb{N} \times Colour \rightarrow \mathbb{N}$ \\
      $calcScore t = ?$
-* State Moves Module
+
+\newpage
+* DONE State Moves Module
+  CLOSED: [2020-03-31 Tue 19:14] SCHEDULED: <2020-03-30 Mon>
 
 ** Template Module Inherits GameState
    StateMoves
