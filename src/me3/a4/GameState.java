@@ -7,7 +7,7 @@ public abstract class GameState {
         RUNNING;
     }
 
-    private State state;
+    protected State state;
 
     /**
        @brief Called at each cycle of the program main loop.
