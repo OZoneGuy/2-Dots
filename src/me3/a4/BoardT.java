@@ -24,7 +24,7 @@ public class BoardT {
         ORANGE;
     }
 
-    public final int SIZE = 6;
+    public static final int SIZE = 6;
 
     private List<List<Colour>> b;
     private GameState state;
