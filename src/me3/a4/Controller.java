@@ -39,10 +39,8 @@ public class Controller {
                 @Override
                 public void run() {
                     while (state.running()) {
-                        state.update();
+                       state.update();
                         view.updateGameLabels();
-                        if (!connections.isEmpty())
-                        	view.updateBoard();
                         if (!state.running())
                             if (state.state() == GameState.State.WIN)
                                 view.showWin();
@@ -54,11 +52,6 @@ public class Controller {
 
         Thread t = new Thread(runnable);
         t.start();
-
-    }
-
-    private void win() {
-        view.showWin();
 
     }
 
@@ -149,7 +142,7 @@ public class Controller {
         Point lastDot = connections.get(connections.size() - 1);
         state.update(connections.size(), board.getCell((int) lastDot.getY(), (int) lastDot.getX()));
         connections.clear();
-
+        view.updateBoard();
     }
 
     private boolean isValidDot(Point dot) {

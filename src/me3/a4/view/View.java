@@ -178,8 +178,6 @@ public class View extends Frame{
         this.addKeyListener(keyListener);
         this.setVisible(true);
         boardP.paintComponents(this.getGraphics());
-
-        // maybe add buttons here, BorderLayout.PAGE_END
     }
 
     /**
@@ -223,7 +221,7 @@ public class View extends Frame{
             this.removeKeyListener(k);
 
         this.add(winP);
-        winP.setVisible(true);
+        this.setVisible(true);
 
     }
 
@@ -242,13 +240,13 @@ public class View extends Frame{
             this.removeKeyListener(k);
 
         this.add(loseP);
-        loseP.setVisible(true);
+        this.setVisible(true);
+        System.out.println("Lost");
 
     }
 
     public void updateBoard(){
         this.boardP.updateBoard();
-        this.boardP.repaint();
     }
 
     public void updateGameLabels(Panel lPanel){
@@ -276,27 +274,20 @@ public class View extends Frame{
     }
     public void updateGameLabels(){
         Panel lPanel = (Panel) ((Container) this.getComponent(0)).getComponent(1);
-        lPanel.removeAll();
         if (this.state instanceof StateTime){
             StateTime tState = (StateTime) this.state;
-            lPanel.add(new Label("Score:"));
-            lPanel.add(new Label(String.valueOf(tState.getScore())));
-            lPanel.add(new Label("Time:"));
-            lPanel.add(new Label(String.valueOf(tState.getRemTime())));
+            ((Label) lPanel.getComponent(1) ).setText(String.valueOf(tState.getScore()));
+            ((Label) lPanel.getComponent(3) ).setText(String.valueOf(tState.getRemTime()));
         }
         else if (this.state instanceof StateScore){
             StateScore tState = (StateScore) this.state;
-            lPanel.add(new Label("Score:"));
-            lPanel.add(new Label(String.valueOf(tState.getScore())));
+            ((Label) lPanel.getComponent(1) ).setText(String.valueOf(tState.getScore()));
         }
         else if (this.state instanceof StateMoves){
             StateMoves tState = (StateMoves) this.state;
-            lPanel.add(new Label("Score:"));
-            lPanel.add(new Label(String.valueOf(tState.getScore())));
-            lPanel.add(new Label("Moves:"));
-            lPanel.add(new Label(String.valueOf(tState.getRemMoves())));
+            ((Label) lPanel.getComponent(1) ).setText(String.valueOf(tState.getScore()));
+            ((Label) lPanel.getComponent(1) ).setText(String.valueOf(tState.getRemMoves()));
         }
-        lPanel.setVisible(true);
     }
 
     private Color getColour(BoardT.Colour c){
@@ -329,14 +320,16 @@ public class View extends Frame{
 
         void updateBoard(){
             lines.clear();
+            this.repaint();
+            this.toMouse = null;
         }
 
         void drawConnection(int i1, int j1,
                             int i2, int j2){
-            double x1 = ((double) this.getWidth()) * j1/ 7 - 30;
-            double y1 = ((double) this.getHeight()) * i1/ 7 - 30;
-            double x2 = ((double) this.getWidth()) * j2/ 7 - 30;
-            double y2 = ((double) this.getHeight()) * i2/ 7 - 30;
+            double x1 = ((double) this.getWidth()) * ( j1 + 1 )/ 7;
+            double y1 = ((double) this.getHeight()) * ( i1 + 1 )/ 7;
+            double x2 = ((double) this.getWidth()) * ( j2 + 1 )/ 7;
+            double y2 = ((double) this.getHeight()) * ( i2 + 1 )/ 7;
             lines.add(new Line2D.Double(x1, y1,
                                         x2, y2));
             // remove all mouse tracking
@@ -344,14 +337,14 @@ public class View extends Frame{
                 this.removeMouseMotionListener(m);
             mouseP = null;
             toMouse = null;
-            this.repaint();
+            repaint();
         }
 
         void drawToMouse(int i, int j){
         	i++;
         	j++;
-            double x = ((double) this.getWidth()) * j / 7 - 30;
-            double y = ((double) this.getHeight()) * i/ 7 - 30;
+            double x = ((double) this.getWidth()) * j / 7;
+            double y = ((double) this.getHeight()) * i/ 7;
             toMouse = new Point2D.Double(x, y);
             mouseP = new Point2D.Double(x, y);
             addMouseMotionListener(new MouseMotionAdapter(){
@@ -386,10 +379,11 @@ public class View extends Frame{
                 }
 
             // draw lines between dots
-            g2d.setStroke(new BasicStroke(10));
+            g2d.setStroke(new BasicStroke((float)30.0, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             for (int i = 0; i < lines.size(); i++){
                 g2d.setColor(getColour(getNodeColour(lines.get(i).getP1())));
-                g2d.draw(lines.get(i));
+                g2d.drawLine((int) lines.get(i).getP1().getX(), (int) lines.get(i).getP1().getY(),
+                             (int) lines.get(i).getP2().getX(), (int) lines.get(i).getP2().getY());
             }
 
             // draw line to mouse
