@@ -27,6 +27,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import me3.a4.BoardT;
 import me3.a4.GameState;
 import me3.a4.StateMoves;
@@ -86,15 +88,15 @@ public class View extends Frame{
         movesB.addActionListener(movesA);
         scoreB.addActionListener(scoreA);
 
-
-
         menu.add(timerB);
         menu.add(movesB);
         menu.add(scoreB);
 
         removeAll();
 
-        add(menu);
+        menu.setVisible(true);
+        this.add(menu);
+        this.setVisible(true);
     }
 
     /**
@@ -169,11 +171,13 @@ public class View extends Frame{
         panel.setVisible(true);
         labelPanel.setVisible(true);
         boardP.setVisible(true);
-        boardP.repaint();
+        boardP.paint(this.getGraphics());
 
         this.removeAll();
         this.add(panel);
         this.addKeyListener(keyListener);
+        this.setVisible(true);
+        boardP.paintComponents(this.getGraphics());
 
         // maybe add buttons here, BorderLayout.PAGE_END
     }
@@ -243,12 +247,38 @@ public class View extends Frame{
     }
 
     public void updateBoard(){
-        Panel lPanel = (Panel) ((Container) this.getComponent(0)).getComponent(1);
-        updateGameLabels(lPanel);
-        this.boardP.repaint();
+        boardP.updateBoard();
+        this.boardP.paint(getGraphics());
     }
 
-    private void updateGameLabels(Panel lPanel){
+    public void updateGameLabels(Panel lPanel){
+        lPanel.removeAll();
+        if (this.state instanceof StateTime){
+            StateTime tState = (StateTime) this.state;
+            lPanel.add(new Label("Score:"));
+            lPanel.add(new Label(String.valueOf(tState.getScore())));
+            lPanel.add(new Label("Time:"));
+            lPanel.add(new Label(String.valueOf(tState.getRemTime())));
+            return;
+        }
+        if (this.state instanceof StateScore){
+            StateScore tState = (StateScore) this.state;
+            lPanel.add(new Label("Score:"));
+            lPanel.add(new Label(String.valueOf(tState.getScore())));
+            return;
+        }
+        if (this.state instanceof StateMoves){
+            StateMoves tState = (StateMoves) this.state;
+            lPanel.add(new Label("Score:"));
+            lPanel.add(new Label(String.valueOf(tState.getScore())));
+            lPanel.add(new Label("Moves:"));
+            lPanel.add(new Label(String.valueOf(tState.getRemMoves())));
+            return;
+        }
+    }
+    public void updateGameLabels(){
+        Panel lPanel = (Panel) ((Container) this.getComponent(0)).getComponent(1);
+        lPanel.removeAll();
         if (this.state instanceof StateTime){
             StateTime tState = (StateTime) this.state;
             lPanel.add(new Label("Score:"));
@@ -286,7 +316,7 @@ public class View extends Frame{
     }
 
     // Inner class for the dots board
-    private class BoardP extends Panel {
+    private class BoardP extends JPanel {
 
         private BoardT b;
 
@@ -322,15 +352,19 @@ public class View extends Frame{
         }
 
         void drawToMouse(int i, int j){
+        	i++;
+        	j++;
             double x = ((double) this.getWidth()) * j / 7 - 30;
             double y = ((double) this.getHeight()) * i/ 7 - 30;
             toMouse = new Point2D.Double(x, y);
+            mouseP = new Point2D.Double(x, y);
             addMouseMotionListener(new MouseMotionAdapter(){
                     @Override
                     public void mouseMoved(MouseEvent e){
                         mouseP = e.getPoint();
                     }
                 });
+            this.repaint();
         }
 
         private BoardT.Colour getNodeColour(Point2D p){
@@ -342,7 +376,7 @@ public class View extends Frame{
 
         @Override
         public void paint(Graphics g){
-            g.clearRect(0, 0, this.getWidth(), this.getHeight());
+        	super.paint(g);
             Graphics2D g2d = (Graphics2D) g;
 
             // draw the dots on the board

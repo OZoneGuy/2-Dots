@@ -40,7 +40,9 @@ public class Controller {
                 public void run() {
                     while (state.running()) {
                         state.update();
-                        view.updateBoard();
+                        view.updateGameLabels();
+                        if (!connections.isEmpty())
+                        	view.updateBoard();
                         if (!state.running())
                             if (state.state() == GameState.State.WIN)
                                 view.showWin();
@@ -98,7 +100,7 @@ public class Controller {
     private ActionListener GMtimerA = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 state = new StateTime(60, 20);
-                board = new BoardT();
+                board = new BoardT(state);
                 run();
             }
         };
@@ -106,7 +108,7 @@ public class Controller {
     private ActionListener GMmovesA = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 state = new StateMoves(20, 20);
-                board = new BoardT();
+                board = new BoardT(state);
                 run();
             }
         };
@@ -114,7 +116,7 @@ public class Controller {
     private ActionListener GMscoreA = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 state = new StateScore(30);
-                board = new BoardT();
+                board = new BoardT(state);
                 run();
             }
         };
@@ -125,6 +127,7 @@ public class Controller {
                 int j = (int) ((7 * (e.getX() - 30)) / e.getComponent().getWidth());
                 if (!connecting) {
                     connections.add(new Point(i, j));
+                    connecting = true;
                     view.connectToMouse(i, j);
                 } else {
                     if (!isValidDot(new Point(i, j))) {
