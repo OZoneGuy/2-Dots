@@ -21,6 +21,8 @@ public class StateMoves extends GameState {
     public void update(int n, BoardT.Colour c){
         score += super.calcScore(n, c);
         moves++;
+        if (score >= scoreGoal)
+            state = GameState.State.WIN;
         if (moves >= maxMoves)
             if (score >= scoreGoal)
                 state = GameState.State.WIN;

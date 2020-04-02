@@ -18,8 +18,6 @@ public class StateScore extends GameState {
         this.score += super.calcScore(n, c);
         if (score >= scoreGoal)
             state = GameState.State.WIN;
-        else
-            state = GameState.State.LOSE;
     }
 
     public int getScore(){
