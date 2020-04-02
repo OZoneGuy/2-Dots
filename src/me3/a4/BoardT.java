@@ -1,6 +1,7 @@
 package me3.a4;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,6 +29,15 @@ public class BoardT {
 
     private List<List<Colour>> b;
     private GameState state;
+    
+    public BoardT() {
+    	b = new ArrayList<>();
+    	for (int i = 0; i <SIZE; i++) {
+    		b.add(new ArrayList<Colour>());
+    		for (int j = 0; j < SIZE; j++)
+    			b.get(i).add(randomColour());
+    	}
+    }
 
     /**
        @brief Get the colour of the dot in location (i, j)
