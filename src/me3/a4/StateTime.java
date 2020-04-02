@@ -2,15 +2,15 @@ package me3.a4;
 
 public class StateTime extends GameState {
 
-    private double endTime;
-    private double curTime;
+    private final long endTime;
+    private long curTime;
     private int score;
     private int scoreGoal;
     private boolean paused;
 
     public StateTime(int time, int score){
         super();
-        this.curTime = System.currentTimeMillis() / 1000;
+        this.curTime = System.currentTimeMillis() / 1000000;
         this.endTime = curTime + time;
         this.score = 0;
         this.scoreGoal = score;
@@ -18,7 +18,7 @@ public class StateTime extends GameState {
     }
 
     public void update(){
-        curTime = System.currentTimeMillis() / 1000;
+        curTime = System.currentTimeMillis() / 1000000;
         if (curTime >= endTime)
             if (score >= scoreGoal)
                 state = GameState.State.WIN;
@@ -27,7 +27,7 @@ public class StateTime extends GameState {
     }
 
     public void update(int n, BoardT.Colour c){
-        curTime = System.currentTimeMillis() / 1000;
+        curTime = System.currentTimeMillis() / 1000000;
         score += super.calcScore(n, c);
         if (score >= scoreGoal)
             state = GameState.State.WIN;
@@ -40,6 +40,7 @@ public class StateTime extends GameState {
     }
 
     public double getRemTime(){
+        System.out.println(endTime - curTime);
         return endTime - curTime;
     }
 
