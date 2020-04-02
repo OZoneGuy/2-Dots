@@ -30,8 +30,9 @@ public class BoardT {
     private List<List<Colour>> b;
     private GameState state;
     
-    public BoardT() {
+    public BoardT(GameState state) {
     	b = new ArrayList<>();
+    	this.state = state;
     	for (int i = 0; i <SIZE; i++) {
     		b.add(new ArrayList<Colour>());
     		for (int j = 0; j < SIZE; j++)
