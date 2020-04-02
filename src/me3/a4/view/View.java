@@ -241,15 +241,13 @@ public class View extends Frame{
 
         this.add(loseP);
         this.setVisible(true);
-        System.out.println("Lost");
-
     }
 
     public void updateBoard(){
         this.boardP.updateBoard();
     }
 
-    public void updateGameLabels(Panel lPanel){
+    private void updateGameLabels(Panel lPanel){
         lPanel.removeAll();
         if (this.state instanceof StateTime){
             StateTime tState = (StateTime) this.state;
@@ -286,7 +284,7 @@ public class View extends Frame{
         else if (this.state instanceof StateMoves){
             StateMoves tState = (StateMoves) this.state;
             ((Label) lPanel.getComponent(1) ).setText(String.valueOf(tState.getScore()));
-            ((Label) lPanel.getComponent(1) ).setText(String.valueOf(tState.getRemMoves()));
+            ((Label) lPanel.getComponent(3) ).setText(String.valueOf(tState.getRemMoves()));
         }
     }
 
