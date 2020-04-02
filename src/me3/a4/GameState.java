@@ -8,6 +8,10 @@ public abstract class GameState {
     }
 
     protected State state;
+    
+    protected GameState() {
+    	state = State.RUNNING;
+    }
 
     /**
        @brief Called at each cycle of the program main loop.
