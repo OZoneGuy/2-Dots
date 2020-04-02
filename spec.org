@@ -19,6 +19,8 @@ There are three specified game types:
 - Moves:
   - The player has a limited number of moves before the game is over. During which he have to score a set score else he loses.
 
+To start the game type the command ~make start~ from . or ./src
+
 \newpage
 * Board Module
   CLOSED: [2020-03-29 Sun 00:47]
