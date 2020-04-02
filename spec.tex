@@ -1,4 +1,4 @@
-% Created 2020-03-31 Tue 19:15
+% Created 2020-04-01 Wed 21:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -52,30 +52,30 @@ There are three specified game types:
 
 \newpage
 \section{{\bfseries\sffamily DONE} Board Module}
-\label{sec:org2fdce5b}
+\label{sec:orga20d6d9}
 \subsection*{Template Module}
-\label{sec:orge6c4914}
+\label{sec:orgbd12550}
 BoardT
 
 \subsection*{Uses}
-\label{sec:orgbe5ffa2}
+\label{sec:org31e3a48}
 GameState
 
 \subsection*{Syntax}
-\label{sec:orge6491a5}
+\label{sec:orgd6bfda4}
 
 \subsubsection*{Exported Constants}
-\label{sec:orga98ccf0}
+\label{sec:orga6d0681}
 SIZE = 6
 
 \subsubsection*{Exported Types}
-\label{sec:org58e6a89}
+\label{sec:org78dedc0}
 
 Colour = \{Blue, Green, Pink, Red, Orange\}\\
 BoardT = ?
 
 \subsubsection*{Exported Access Program}
-\label{sec:org5e62de5}
+\label{sec:org059596b}
 \begin{center}
 \begin{tabular}{l|l|l|l}
 Routine name & In & Out & Exception\\
@@ -88,30 +88,30 @@ getCell & \(\mathbb{N}\), \(\mathbb{N}\) & Colour & IndexOutOfBoundsException\\
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:org26b2056}
+\label{sec:org5cfbe4e}
 
 \begin{itemize}
 \item State Variables
-\label{sec:org984a062}
+\label{sec:org0a0cda9}
 
 b: seq (seq (Colour))
 
 state: GameState
 
 \item State Invariant
-\label{sec:org94750e7}
+\label{sec:org8138108}
 
 \(|b| = SIZE\)
 
 \(\forall i, j: i, j \in \mathbb{N} \land 0 \leq i,j < |b| \bullet |b[i]| = |b[j]| \land |b[i]| = SIZE\)
 
 \item Assumptions
-\label{sec:org7582e48}
+\label{sec:orgbb7ee9a}
 
 BoardT is called before any other routine is called.
 
 \item Access Routine Semantics
-\label{sec:orgbdddedf}
+\label{sec:orgcb0f3d8}
 
 \texttt{new} BoardT(gs):
 \begin{itemize}
@@ -129,7 +129,7 @@ consume(set):
 \item Down means that the object moves to the row below. If an object is at s[i][j], where \(i \neq 0\) then moving down will put it at s[i-1][j].
 \end{itemize}
 \item output: None
-\item Exception: \(exc:= \exists c: c \in set \bullet ¬ (0 \leq c.i < SIZE \land 0\leq c.j < SIZE) \implies IndexOutOfBoundsException\) | \(\lnot \forall i, j ,k, l : i, j, k, l \in \mathbb{N} \land i < SIZE \land j < SIZE \land k < SIZE \land l < SIZE \bullet b[i][j] = b[k][l]\)
+\item Exception: \(exc:= \exists c: c \in set \bullet ¬ (0 \leq c.i < SIZE \land 0\leq c.j < SIZE) \implies IndexOutOfBoundsException\) | \(\lnot \forall i, j ,k, l : i, j, k, l \in \mathbb{N} \land i < SIZE \land j < SIZE \land k < SIZE \land l < SIZE \bullet b[i][j] = b[k][l] \implies IllegalArgumentException\)
 \end{itemize}
 
 updateBoard()
@@ -149,21 +149,21 @@ getCell(i, j)
 \newpage
 \end{itemize}
 \section{{\bfseries\sffamily TODO} Controller Module}
-\label{sec:org2386cca}
+\label{sec:orgd7db793}
 \subsection*{Abstract Object Module}
-\label{sec:org16b78a3}
+\label{sec:org0119752}
 Controller
 \subsection*{Uses}
-\label{sec:org301cbe7}
+\label{sec:org1c908e4}
 GameState, BoardT, View
 \subsection*{Syntax}
-\label{sec:org4c8caa0}
+\label{sec:orgbe80a32}
 \subsubsection*{Exported Constants}
-\label{sec:org73b62d8}
+\label{sec:org59108ca}
 \subsubsection*{Exported Types}
-\label{sec:org2508760}
+\label{sec:org52bfe6b}
 \subsubsection*{Exported Access Program}
-\label{sec:orgddbdea2}
+\label{sec:org09f2259}
 \begin{center}
 \begin{tabular}{l|l|l|l}
 Routine name & In & Out & Exception\\
@@ -177,10 +177,10 @@ exit &  &  & \\
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:org17ac65b}
+\label{sec:org6be9d7d}
 \begin{itemize}
 \item State Variables
-\label{sec:org318c29a}
+\label{sec:org5763db9}
 
 board: BoardT
 
@@ -189,11 +189,11 @@ game: GameState
 win: View
 
 \item Environment Variables
-\label{sec:orgff28d91}
+\label{sec:org05fdf43}
 \item State Invariant
-\label{sec:orga5c8485}
+\label{sec:org92e7080}
 \item Assumptions
-\label{sec:org87c9471}
+\label{sec:orgf9e48c6}
 All methods are run after \texttt{Controller}.
 
 \texttt{run} is the program main loop. It is called right after \texttt{Controller}
@@ -201,30 +201,30 @@ All methods are run after \texttt{Controller}.
 \texttt{loseFocus} and \texttt{handleBoardClick} are even listeners used by the GUI library.
 
 \item Access Routine Semantics
-\label{sec:orgd876730}
+\label{sec:org9417ccd}
 \item Local Functions
-\label{sec:orge9b3482}
+\label{sec:org7553822}
 
 
 \newpage
 \end{itemize}
-\section{{\bfseries\sffamily NEXT} View Module}
-\label{sec:org827f7aa}
+\section{{\bfseries\sffamily DONE} View Module}
+\label{sec:orgb0b0b9f}
 \subsection*{Abstract Object Module}
-\label{sec:orgf2401ff}
+\label{sec:org7426852}
 View
 \subsection*{Uses}
-\label{sec:org3d6ea8e}
+\label{sec:org0db6d8c}
 
 \subsection*{Syntax}
-\label{sec:org08c8cbb}
+\label{sec:orgfc61455}
 \subsubsection*{Exported Constants}
-\label{sec:org5dcbd1c}
+\label{sec:org9e91b38}
 \subsubsection*{Exported Types}
-\label{sec:orga63a7dd}
+\label{sec:org292bb46}
 View = ?
 \subsubsection*{Exported Access Program}
-\label{sec:orga4c6146}
+\label{sec:org088899f}
 \begin{center}
 \begin{tabular}{l|l|l|l}
 Routine name & In & Out & Exception\\
@@ -242,22 +242,22 @@ drawConnection & \((\mathbb{N}, \mathbb{N})\), \((\mathbb{N}, \mathbb{N})\), Col
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:orgfa2f7f7}
+\label{sec:org2bdd06c}
 \begin{itemize}
 \item State Variables
-\label{sec:org5c691b2}
+\label{sec:org26a0286}
 
 board: BoardT
 
 game: GameState
 
 \item Environment Variables
-\label{sec:orgca3697f}
+\label{sec:org4a37dc0}
 screen : The screen.
 \item State Invariant
-\label{sec:org9ca4e2b}
+\label{sec:org9e947c3}
 \item Assumptions
-\label{sec:org1fa4929}
+\label{sec:org19540e9}
 All functions are called after View has been called.
 
 startGame is called after gameMenu.
@@ -269,7 +269,7 @@ showWin and showLose are called only when \(state.running() = false\).
 updateBoard is called only after startGame and while \(state.running() = true\).
 
 \item Access Routine Semantics
-\label{sec:org4da63ad}
+\label{sec:org478511c}
 
 \texttt{new} View():
 \begin{itemize}
@@ -342,33 +342,33 @@ connectToMouse(coord, c):
 \end{itemize}
 
 \item Local Functions
-\label{sec:orgb335533}
+\label{sec:orgd26a7eb}
 
 
 \newpage
 \end{itemize}
 \section{{\bfseries\sffamily DONE} Game State Module}
-\label{sec:org1e4e2a0}
+\label{sec:orgf05ec63}
 \subsection*{Interface}
-\label{sec:orgfe4b6d6}
+\label{sec:orga0f341a}
 GameState
 
 \subsection*{Uses}
-\label{sec:org23793b5}
+\label{sec:org1cdfd72}
 None
 
 \subsection*{Syntax}
-\label{sec:orgce6dc09}
+\label{sec:org59cb005}
 \subsubsection*{Exported Constants}
-\label{sec:org51ebac4}
+\label{sec:orgcdcaa69}
 None
 
 \subsubsection*{Exported Types}
-\label{sec:org5c6878b}
+\label{sec:org1f14a85}
 State = \{Win, Lose, Running\}
 
 \subsubsection*{Exported Access Program}
-\label{sec:org1ebe01b}
+\label{sec:org0078bf7}
 \begin{center}
 \begin{tabular}{l|l|l|l}
 Routine name & In & Out & Exception\\
@@ -381,14 +381,14 @@ running &  & \(\mathbb{B}\) & \\
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:org09eac64}
+\label{sec:org765eba9}
 \begin{itemize}
 \item State Variables
-\label{sec:org1d8d495}
+\label{sec:org487f9f2}
 state: State
 
 \item Access Routine Semantics
-\label{sec:org3794926}
+\label{sec:org1982925}
 
 state()
 \begin{itemize}
@@ -407,27 +407,27 @@ running()
 \newpage
 \end{itemize}
 \section{{\bfseries\sffamily DONE} State Timer Module}
-\label{sec:org7c13b22}
+\label{sec:org951f248}
 \subsection*{Template Module inherits GameState}
-\label{sec:orgc27d792}
+\label{sec:org9f7c39b}
 StateTime
 
 \subsection*{Uses}
-\label{sec:org55ab6e6}
+\label{sec:org105f8b4}
 GameState, BoardT
 
 \subsection*{Syntax}
-\label{sec:orgf925ac6}
+\label{sec:orgc650dba}
 \subsubsection*{Exported Constants}
-\label{sec:org5ba026b}
+\label{sec:org894de57}
 None
 
 \subsubsection*{Exported Types}
-\label{sec:org0f21311}
+\label{sec:org4faf3fd}
 StateTime = ?
 
 \subsubsection*{Exported Access Routine}
-\label{sec:org3593f86}
+\label{sec:orge5b760b}
 \begin{center}
 \begin{tabular}{l|l|l|l}
 Routine name & In & Out & Exception\\
@@ -442,10 +442,10 @@ isPaused &  & \(\mathbb{B}\) & \\
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:org1d79131}
+\label{sec:org9eaf5a2}
 \begin{itemize}
 \item State Variables
-\label{sec:org05a5113}
+\label{sec:org8514026}
 
 \(endTime: \mathbb{R}\)
 
@@ -458,22 +458,22 @@ isPaused &  & \(\mathbb{B}\) & \\
 \(paused: \mathbb{B}\)
 
 \item Environment Variables
-\label{sec:org2f038a6}
+\label{sec:org61c30d0}
 
 sysTime: The current system time in seconds.
 
 \item State Invariant
-\label{sec:org3145781}
+\label{sec:org9b77601}
 
 \(endTime > 0\)
 
 \item Assumption
-\label{sec:orgd5890a5}
+\label{sec:org82dd618}
 
 StateTime is called before any other method is called.
 
 \item Access Routine Semantics
-\label{sec:org2207032}
+\label{sec:org9943269}
 
 \texttt{new} StateTime(i, t):
 \begin{itemize}
@@ -532,7 +532,7 @@ isPaused()
 \end{itemize}
 
 \item Local Functions
-\label{sec:orgdfcccda}
+\label{sec:orge62ddc3}
 
 calcScore: \(\mathbb{N} \times Colour \rightarrow \mathbb{N}\) \\
 \(calcScore t = ?\)
@@ -540,25 +540,25 @@ calcScore: \(\mathbb{N} \times Colour \rightarrow \mathbb{N}\) \\
 \newpage
 \end{itemize}
 \section{{\bfseries\sffamily DONE} State Score Module}
-\label{sec:org41ada9b}
+\label{sec:org96677f0}
 \subsection*{Template Module Inherits GameState}
-\label{sec:org861bf70}
+\label{sec:orgeca4517}
 StateScore
 \subsection*{Uses}
-\label{sec:org495d861}
+\label{sec:orgfa12df9}
 GameState
 \subsection*{Syntax}
-\label{sec:org2d3278a}
+\label{sec:orgaadb484}
 \subsubsection*{Exported Constants}
-\label{sec:orge63e91e}
+\label{sec:org6d3b77e}
 None
 
 \subsubsection*{Exported Types}
-\label{sec:orgbe61105}
+\label{sec:orgf03d932}
 StateScore = ?
 
 \subsubsection*{Exported Access Routine}
-\label{sec:org1824241}
+\label{sec:org9036bf7}
 \begin{center}
 \begin{tabular}{l|l|l|l}
 Routine name & In & Out & Exception\\
@@ -570,28 +570,28 @@ getMaxScore &  & \(\mathbb{N}\) & \\
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:orga97d415}
+\label{sec:org6eaed3c}
 
 \begin{itemize}
 \item State Variables
-\label{sec:orgd3b30c2}
+\label{sec:orgf89c565}
 
 \(score: \mathbb{N}\)
 
 \(scoreGoal: \mathbb{N}\)
 
 \item State Invariant
-\label{sec:org2e92781}
+\label{sec:org950eddc}
 
 \(0 \leq score \leq scoreGoal\)
 
 \item Assumptions
-\label{sec:orga54f3f5}
+\label{sec:orgd6aad8d}
 
 StateScore is called before any other routine.
 
 \item Access Routine Semantics
-\label{sec:org9a6674f}
+\label{sec:orgae59658}
 
 \texttt{new} StateScore(i)
 \begin{itemize}
@@ -629,7 +629,7 @@ getMaxScore()
 \end{itemize}
 
 \item Local Functions
-\label{sec:org2811b82}
+\label{sec:orgb4592d3}
 
 calcScore: \(\mathbb{N} \times Colour \rightarrow \mathbb{N}\) \\
 \(calcScore t = ?\)
@@ -637,27 +637,27 @@ calcScore: \(\mathbb{N} \times Colour \rightarrow \mathbb{N}\) \\
 \newpage
 \end{itemize}
 \section{{\bfseries\sffamily DONE} State Moves Module}
-\label{sec:org9084762}
+\label{sec:org108d3c6}
 \subsection*{Template Module Inherits GameState}
-\label{sec:orgadf16e4}
+\label{sec:org1e79d7f}
 StateMoves
 
 \subsection*{Uses}
-\label{sec:org032a983}
+\label{sec:org8bdb4d1}
 GameState
 
 \subsection*{Syntax}
-\label{sec:org13f3c6d}
+\label{sec:org4376df6}
 
 \subsubsection*{Exported Constants}
-\label{sec:orgb40b07f}
+\label{sec:org367d99e}
 
 \subsubsection*{Exported Types}
-\label{sec:orgc9e82c1}
+\label{sec:orgfc195e2}
 StateMoves
 
 \subsubsection*{Exported Access Routine}
-\label{sec:org40dfc37}
+\label{sec:org6856a0b}
 \begin{center}
 \begin{tabular}{l|l|l|l|}
 Routine name & In & Out & Exception\\
@@ -670,11 +670,11 @@ getRemMoves &  & \(\mathbb{N}\) & \\
 \end{center}
 
 \subsubsection*{Semantics}
-\label{sec:orgb23e0c1}
+\label{sec:org4be8bd6}
 
 \begin{itemize}
 \item State Variables
-\label{sec:org6edb656}
+\label{sec:org6a03947}
 
 \(score := \mathbb{N}\)
 
@@ -685,19 +685,19 @@ getRemMoves &  & \(\mathbb{N}\) & \\
 \(maxMoves := \mathbb{N}\)
 
 \item State Invariant
-\label{sec:org7e84d6f}
+\label{sec:orgada2760}
 
 \(0 \leq score \leq scoreGoal\)
 
 \(0 \leq moves \leq maxMoves\)
 
 \item Assumptions
-\label{sec:orgee7c12a}
+\label{sec:org017428c}
 
 StateMoves is called before any other routine.
 
 \item Access Routine Semantics
-\label{sec:org980014c}
+\label{sec:org2555229}
 
 \texttt{new} StateMoves(i, m):
 \begin{itemize}
@@ -740,7 +740,7 @@ getRemMoves()
 \end{itemize}
 
 \item Local Functions
-\label{sec:orgbbc197f}
+\label{sec:orgc182309}
 
 calcScore: \(\mathbb{N} \times Colour) \rightarrow \mathbb{N}\) \\
 \(calcScore t = ?\)

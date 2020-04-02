@@ -77,7 +77,7 @@ There are three specified game types:
        + Coordinates are entries in the 2D array.
        + Down means that the object moves to the row below. If an object is at s[i][j], where $i \neq 0$ then moving down will put it at s[i-1][j].
      + output: None
-     + Exception: $exc:= \exists c: c \in set \bullet ¬ (0 \leq c.i < SIZE \land 0\leq c.j < SIZE) \implies IndexOutOfBoundsException$ | $\lnot \forall i, j ,k, l : i, j, k, l \in \mathbb{N} \land i < SIZE \land j < SIZE \land k < SIZE \land l < SIZE \bullet b[i][j] = b[k][l]$
+     + Exception: $exc:= \exists c: c \in set \bullet ¬ (0 \leq c.i < SIZE \land 0\leq c.j < SIZE) \implies IndexOutOfBoundsException$ | $\lnot \forall i, j ,k, l : i, j, k, l \in \mathbb{N} \land i < SIZE \land j < SIZE \land k < SIZE \land l < SIZE \bullet b[i][j] = b[k][l] \implies IllegalArgumentException$
 
      updateBoard()
      + transition: All non-null cells are moved "down". Finally the remaining ~Null~ cells are set to different colours.
@@ -131,7 +131,8 @@ There are three specified game types:
 
 
 \newpage
-* NEXT View Module
+* DONE View Module
+  CLOSED: [2020-04-01 Wed 21:01]
 ** Abstract Object Module
    View
 ** Uses
