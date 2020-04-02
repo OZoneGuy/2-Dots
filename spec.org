@@ -2,6 +2,8 @@
 #+author: Omar Alkersh - alkersho
 #+options: toc:nil num:1
 #+latex_header: \usepackage[a4paper, margin=1in]{geometry} \usepackage[utf8]{inputenc}
+#+latex_header: \usepackage{tikz}
+#+latex_header: \usetikzlibrary{positioning,arrows}
 #+TODO: TODO(t) NEXT(n) | DONE(d) CONFUSED(c) TOCHANGE(g)
 
 The specification for /Two Dots/ consists of ~Controller~, the main controller in the CV, ~View~, the module responsible for the view, ~BoardT~, the module holding the board information, ~GameState~ interface, the interface responsible for the win and lose conditions, and the three implementing modules of ~GameState~.
@@ -525,3 +527,34 @@ There are three specified game types:
 
      calcScore: $\mathbb{N} \times Colour) \rightarrow \mathbb{N}$ \\
      $calcScore t = ?$
+
+\newpage
+* Bubblesort CFG
+  #+begin_export latex
+  \begin{center}
+    \begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, node distance=2cm, semithick,
+  roundnode/.style={circle, draw=black, very thick, minimum size=1cm}]
+      \node[roundnode] (start) {Begin};
+      \node[roundnode] [below of=start] (for1) {For};
+      \node[roundnode] [below of=for1] (for2) {For};
+      \node[roundnode] [below of=for2] (if) {If};
+      \node[roundnode] [below of=if] (ifEnd) {end If};
+      \node[roundnode] [below of=ifEnd] (forEnd2) {end For};
+      \node[roundnode] [below of=forEnd2] (forEnd1) {end For};
+      \node[roundnode] [below of=forEnd1] (end) {end};
+
+      \path
+        (start) edge (for1)
+        (for1) edge (for2)
+        (for2) edge (if)
+        (if) edge (ifEnd)
+             edge[left,in=-180,out=-180] node {$arr[j] < arr[j+1]$} (ifEnd)
+        (ifEnd) edge (forEnd2)
+        (forEnd2) edge (forEnd1)
+        (forEnd1) edge (end)
+
+        (forEnd2) edge[left,in=0,out=0] (for2)
+        (forEnd1) edge[right,in=0,out=0] (for1);
+    \end{tikzpicture}
+  \end{center}
+  #+end_export
