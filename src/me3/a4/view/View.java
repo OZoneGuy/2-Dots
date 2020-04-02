@@ -171,7 +171,7 @@ public class View extends Frame{
         panel.setVisible(true);
         labelPanel.setVisible(true);
         boardP.setVisible(true);
-        boardP.paint(this.getGraphics());
+        boardP.repaint();
 
         this.removeAll();
         this.add(panel);
@@ -247,8 +247,8 @@ public class View extends Frame{
     }
 
     public void updateBoard(){
-        boardP.updateBoard();
-        this.boardP.paint(getGraphics());
+        this.boardP.updateBoard();
+        this.boardP.repaint();
     }
 
     public void updateGameLabels(Panel lPanel){
@@ -259,22 +259,20 @@ public class View extends Frame{
             lPanel.add(new Label(String.valueOf(tState.getScore())));
             lPanel.add(new Label("Time:"));
             lPanel.add(new Label(String.valueOf(tState.getRemTime())));
-            return;
         }
-        if (this.state instanceof StateScore){
+        else if (this.state instanceof StateScore){
             StateScore tState = (StateScore) this.state;
             lPanel.add(new Label("Score:"));
             lPanel.add(new Label(String.valueOf(tState.getScore())));
-            return;
         }
-        if (this.state instanceof StateMoves){
+        else if (this.state instanceof StateMoves){
             StateMoves tState = (StateMoves) this.state;
             lPanel.add(new Label("Score:"));
             lPanel.add(new Label(String.valueOf(tState.getScore())));
             lPanel.add(new Label("Moves:"));
             lPanel.add(new Label(String.valueOf(tState.getRemMoves())));
-            return;
         }
+        lPanel.setVisible(true);
     }
     public void updateGameLabels(){
         Panel lPanel = (Panel) ((Container) this.getComponent(0)).getComponent(1);
@@ -285,22 +283,20 @@ public class View extends Frame{
             lPanel.add(new Label(String.valueOf(tState.getScore())));
             lPanel.add(new Label("Time:"));
             lPanel.add(new Label(String.valueOf(tState.getRemTime())));
-            return;
         }
-        if (this.state instanceof StateScore){
+        else if (this.state instanceof StateScore){
             StateScore tState = (StateScore) this.state;
             lPanel.add(new Label("Score:"));
             lPanel.add(new Label(String.valueOf(tState.getScore())));
-            return;
         }
-        if (this.state instanceof StateMoves){
+        else if (this.state instanceof StateMoves){
             StateMoves tState = (StateMoves) this.state;
             lPanel.add(new Label("Score:"));
             lPanel.add(new Label(String.valueOf(tState.getScore())));
             lPanel.add(new Label("Moves:"));
             lPanel.add(new Label(String.valueOf(tState.getRemMoves())));
-            return;
         }
+        lPanel.setVisible(true);
     }
 
     private Color getColour(BoardT.Colour c){
@@ -362,6 +358,7 @@ public class View extends Frame{
                     @Override
                     public void mouseMoved(MouseEvent e){
                         mouseP = e.getPoint();
+                        repaint();
                     }
                 });
             this.repaint();
@@ -398,7 +395,8 @@ public class View extends Frame{
             // draw line to mouse
             if (this.toMouse != null){
                 g2d.setColor(getColour(getNodeColour(toMouse)));
-                g2d.draw(new Line2D.Double(toMouse, mouseP));
+                g2d.drawLine((int) toMouse.getX(), (int) toMouse.getY(),
+                			 (int) mouseP.getX(), (int) mouseP.getY());
             }
         }
     }
