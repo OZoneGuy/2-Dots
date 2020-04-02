@@ -18,7 +18,7 @@ There are three specified game types:
   - The player has a limited number of moves before the game is over. During which he have to score a set score else he loses.
 
 \newpage
-* DONE Board Module
+* Board Module
   CLOSED: [2020-03-29 Sun 00:47]
 
 ** Template Module
@@ -90,7 +90,8 @@ There are three specified game types:
      + Exception: $exc := ¬ (0 \leq i < SIZE \land 0 \leq j < SIZE) \implies IndexOutOfBoundsException$
 
 \newpage
-* TODO Controller Module
+* Controller Module
+  CLOSED: [2020-04-02 Thu 17:45]
 ** Abstract Object Module
    Controller
 ** Uses
@@ -99,14 +100,10 @@ There are three specified game types:
 *** Exported Constants
 *** Exported Types
 *** Exported Access Program
-    | Routine name     | In | Out        | Exception |
-    |------------------+----+------------+-----------|
-    | /                | <> | <>         | <         |
-    | Controller       |    | Controller |           |
-    | running          |    |            |           |
-    | handleBoardClick |    |            |           |
-    | loseFocus        |    |            |           |
-    | exit             |    |            |           |
+    | Routine name | In | Out        | Exception |
+    |--------------+----+------------+-----------|
+    | /            | <> | <>         | <         |
+    | Controller   |    | Controller |           |
 
 *** Semantics
 **** State Variables
@@ -120,18 +117,18 @@ There are three specified game types:
 **** Environment Variables
 **** State Invariant
 **** Assumptions
-     All methods are run after ~Controller~.
-
-    ~run~ is the program main loop. It is called right after ~Controller~
-
-    ~loseFocus~ and ~handleBoardClick~ are even listeners used by the GUI library.
 
 **** Access Routine Semantics
+
+     ~new~ Controller:
+     + transition: calls View with the correct parameters.
+     + out: None
+     + Exceptions: None
 **** Local Functions
 
 
 \newpage
-* DONE View Module
+* View Module
   CLOSED: [2020-04-01 Wed 21:01]
 ** Abstract Object Module
    View
@@ -142,18 +139,19 @@ There are three specified game types:
 *** Exported Types
     View = ?
 *** Exported Access Program
-    | Routine name   | In                                                             | Out | Exception |
-    | /              | <>                                                             | <>  | <         |
-    |----------------+----------------------------------------------------------------+-----+-----------|
-    | View           |                                                                |     |           |
-    | gameMenu       |                                                                |     |           |
-    | startGame      | GameState, BoardT                                              |     |           |
-    | showPause      |                                                                |     |           |
-    | showWin        |                                                                |     |           |
-    | showLose       |                                                                |     |           |
-    | updateBoard    |                                                                |     |           |
-    | connectToMouse | $(\mathbb{N}, \mathbb{N})$, Colour                             |     |           |
-    | drawConnection | $(\mathbb{N}, \mathbb{N})$, $(\mathbb{N}, \mathbb{N})$, Colour |     |           |
+    | Routine name   | In                                                 | Out | Exception |
+    | /              | <>                                                 | <>  | <         |
+    |----------------+----------------------------------------------------+-----+-----------|
+    | View           | WindowListener, ActionListener, ActionListener     |     |           |
+    | gameMenu       | ActionListener, ActionListener, ActionListener     |     |           |
+    | startGame      | GameState, BoardT, MouseListener, KeyListener      |     |           |
+    | showPause      | ActionListener, ActionListener, ActionListener     |     |           |
+    | showWin        |                                                    |     |           |
+    | showLose       |                                                    |     |           |
+    | updateBoard    |                                                    |     |           |
+    | connectToMouse | $\mathbb{N}, \mathbb{N}$                           |     |           |
+    | drawConnection | $\mathbb{N}, \mathbb{N}$, $\mathbb{N}, \mathbb{N}$ |     |           |
+    | updateLabels   |                                                    |     |           |
 
 *** Semantics
 **** State Variables
@@ -226,11 +224,16 @@ There are three specified game types:
      + output: None
      + Exception: None
 
+     updateLabels():
+     + transitions: screen := updates the game labels to reflect the ~state~ data.
+     + output: None
+     + Exception: None
+
 **** Local Functions
 
 
 \newpage
-* DONE Game State Module
+* Game State Module
   CLOSED: [2020-03-29 Sun 00:47]
 
 ** Interface
@@ -272,7 +275,7 @@ There are three specified game types:
      + Exception: None
 
 \newpage
-* DONE State Timer Module
+* State Timer Module
   CLOSED: [2020-03-31 Tue 19:14] SCHEDULED: <2020-03-30 Mon>
 ** Template Module inherits GameState
    StateTime
@@ -371,7 +374,7 @@ There are three specified game types:
      $calcScore t = ?$
 
 \newpage
-* DONE State Score Module
+* State Score Module
   CLOSED: [2020-03-31 Tue 19:14] SCHEDULED: <2020-03-30 Mon>
 ** Template Module Inherits GameState
    StateScore
@@ -441,7 +444,7 @@ There are three specified game types:
      $calcScore t = ?$
 
 \newpage
-* DONE State Moves Module
+* State Moves Module
   CLOSED: [2020-03-31 Tue 19:14] SCHEDULED: <2020-03-30 Mon>
 
 ** Template Module Inherits GameState
