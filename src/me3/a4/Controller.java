@@ -139,8 +139,6 @@ public class Controller {
     private void terminateConnection() {
         connecting = false;
         board.consume(connections);
-        Point lastDot = connections.get(connections.size() - 1);
-        state.update(connections.size(), board.getCell((int) lastDot.getY(), (int) lastDot.getX()));
         connections.clear();
         view.updateBoard();
     }
