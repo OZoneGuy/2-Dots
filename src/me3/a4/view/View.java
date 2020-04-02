@@ -20,7 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowStateListener;
+import java.awt.event.WindowListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -38,11 +38,11 @@ public class View extends Frame{
     private GameState state;
     private BoardP boardP;
 
-    public View(WindowStateListener winListener,
+    public View(WindowListener winListener,
                 ActionListener buttonSGameListener,
                 ActionListener closeListener) {
 
-        addWindowStateListener(winListener);
+        this.addWindowListener(winListener);
 
         removeAll();
 
