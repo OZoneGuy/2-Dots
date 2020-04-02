@@ -1,7 +1,7 @@
 package me3.a4;
 
+import java.awt.Point;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -46,12 +46,13 @@ public class BoardT {
 
        @param pos The positions to consume.
     */
-    public void consume (Map<Integer, Integer> pos){
+    public void consume (List<Point> pos){
         Colour c = Colour.BLUE;
         int n = 0;
         // set the consumed locations to null
-        for (int i:pos.keySet()){
-            int j = pos.get(i);
+        for (Point p: pos){
+            int i = (int) p.getY();
+            int j = (int) p.getX();
             if (c != Colour.BLUE)
                 if (getCell(i, j) != c)
                     throw new IllegalArgumentException("The locations specified do not have the same colour.");
