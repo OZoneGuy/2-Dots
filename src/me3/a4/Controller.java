@@ -126,17 +126,17 @@ public class Controller {
                 int i = (int) ((7 * (e.getY() - 30)) / e.getComponent().getHeight());
                 int j = (int) ((7 * (e.getX() - 30)) / e.getComponent().getWidth());
                 if (!connecting) {
-                    connections.add(new Point(i, j));
+                    connections.add(new Point(j, i));
                     connecting = true;
                     view.connectToMouse(i, j);
                 } else {
-                    if (!isValidDot(new Point(i, j))) {
+                    if (!isValidDot(new Point(j, i))) {
                         terminateConnection();
                         return;
                     }
                     Point lastDot = connections.get(connections.size() - 1);
                     view.drawConnection(i, j, (int) lastDot.getY(), (int) lastDot.getX());
-                    connections.add(new Point(i, j));
+                    connections.add(new Point(j, i));
                     view.connectToMouse(i, j);
                 }
             }
