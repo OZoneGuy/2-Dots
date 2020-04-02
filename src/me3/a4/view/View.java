@@ -346,9 +346,9 @@ public class View extends Frame{
             Graphics2D g2d = (Graphics2D) g;
 
             // draw the dots on the board
-            for (int i = 0; i < BoardT.SIZE; i++)
-                for (int j = 0; j < BoardT.SIZE; j++){
-                    g2d.setColor(getColour(b.getCell(i, j)));
+            for (int i = 1; i <= BoardT.SIZE; i++)
+                for (int j = 1; j <= BoardT.SIZE; j++){
+                    g2d.setColor(getColour(b.getCell(i- 1, j-1)));
                     double x = ((double) this.getWidth()) * j / 7 - 30;
                     double y = ((double) this.getHeight()) * i/ 7 - 30;
                     g2d.fill(new Ellipse2D.Double(x, y, 60, 60));
