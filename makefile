@@ -1,6 +1,6 @@
 
 JFLAGS = -g
-JCLASS = -cp ./src:.:$(CLASSPATH):/usr/share/java/junit4-4.5.jar # on mills
+JCLASS = -cp ./src:.:$(CLASSPATH):/usr/share/java/junit4-4.5.jar: # on mills
 JC = javac
 JVM = java
 .SUFFIXES: .java .class
@@ -8,9 +8,15 @@ JVM = java
 	$(JC) $(JFLAGS) $(JCLASS) $*.java
 
 CLASSES = \
-			src/me3/a4/view/TestView.java
+			src/me3/a4/Controller.java \
+	    src/me3/a4/BoardT.java \
+			src/me3/a4/GameState.java \
+			src/me3/a4/StateMoves.java \
+	    src/me3/a4/StateScore.java \
+		  src/me3/a4/StateTime.java \
+			src/me3/a4/view/View.java \
 
-# MAIN = AllTests
+MAIN = AllTests
 
 default: classes
 
@@ -22,9 +28,6 @@ doc:
 
 test: src/$(MAIN).class
 	$(JVM) $(JCLASS) org.junit.runner.JUnitCore $(MAIN)
-
-testView: src/me3/a4/view/TestView.class
-	$(JVM) $(JCLASS) me3.a4.view.TestView
 
 clean:
 	rm -rf html
