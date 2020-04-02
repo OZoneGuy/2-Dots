@@ -31,8 +31,11 @@ public class StateTime extends GameState {
         score += super.calcScore(n, c);
         if (score >= scoreGoal)
             state = GameState.State.WIN;
-        else
-            state = GameState.State.LOSE;
+        if (curTime >= endTime)
+            if (score >= scoreGoal)
+                state = GameState.State.WIN;
+            else
+                state = GameState.State.LOSE;
     }
 
     public int getScore(){
