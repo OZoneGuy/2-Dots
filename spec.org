@@ -19,7 +19,7 @@ There are three specified game types:
 - Moves:
   - The player has a limited number of moves before the game is over. During which he have to score a set score else he loses.
 
-To start the game type the command ~make start~ from . or ./src
+To start the game type the command ~make run~ from the project source, where the makefile is.
 
 \newpage
 * Board Module
@@ -560,3 +560,8 @@ To start the game type the command ~make start~ from . or ./src
     \end{tikzpicture}
   \end{center}
   #+end_export
+
+* Known Bugs
+  + Game doesn't pause
+    + Should pause when window focus is lost or when the user presses ~esc~.
+  + The dot hit box is not wide, player needs to click in the centre of the dot.
