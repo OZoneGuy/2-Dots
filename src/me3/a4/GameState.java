@@ -1,6 +1,20 @@
 package me3.a4;
+/**
+   @brief The File containing the abstract class for the game state.
+   @author Omar Alkersh - alkersho
+   @file GameState.java
+   @date 2020-03-27
+ */
 
+
+/**
+   @brief The abstract class for the game state.
+*/
 public abstract class GameState {
+
+    /**
+       @brief Enum class to represent the state.
+     */
     public enum State {
         WIN,
         LOSE,
@@ -8,7 +22,7 @@ public abstract class GameState {
     }
 
     protected State state;
-    
+
     protected GameState() {
     	state = State.RUNNING;
     }

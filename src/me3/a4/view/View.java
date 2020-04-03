@@ -1,4 +1,10 @@
 package me3.a4.view;
+/**
+   @brief The file responsible for the view in the CVM.
+   @author Omar Alkersh - alkersho
+   @file View.java
+   @data 2020-04-01
+ */
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -35,11 +41,22 @@ import me3.a4.StateMoves;
 import me3.a4.StateScore;
 import me3.a4.StateTime;
 
+/**
+   @brief The class responsible for the view in the CVM.
+*/
 public class View extends Frame{
 
     private GameState state;
     private BoardP boardP;
 
+    /**
+       @brief The constructor for the View class.
+
+       @param winListener The listener responsible for window events, WIP.
+       @param buttonSGameListener The Actio listener responsible for the start game button.
+       @param closeListener The Actio listener responsible for the close button.
+
+     */
     public View(WindowListener winListener,
                 ActionListener buttonSGameListener,
                 ActionListener closeListener) {

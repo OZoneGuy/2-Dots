@@ -1,5 +1,12 @@
 package me3.a4;
 
+/**
+   @brief the file for the Control class in the CVM.
+   @author Omar Alkersh - alkresho
+   @date 2020-03-31
+   @file Controller.java
+ */
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +22,9 @@ import java.util.List;
 
 import me3.a4.view.View;
 
+/**
+   @brief The Controller class in the CVM.
+ */
 public class Controller {
 
     private BoardT board;
@@ -23,10 +33,16 @@ public class Controller {
     private List<Point> connections;
     private boolean connecting;
 
+    /**
+       @brief The Constructor for the Controller.
+     */
     public Controller() {
         this.view = new View(winListener, pauseNewA, exitA);
     }
 
+    /**
+       @brief the main method to run the game.
+     */
     public static void main(String[] args) {
         new Controller();
     }

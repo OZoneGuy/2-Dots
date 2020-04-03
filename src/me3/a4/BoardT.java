@@ -29,15 +29,20 @@ public class BoardT {
 
     private List<List<Colour>> b;
     private GameState state;
-    
+
+    /**
+       @brief The Constructor for the BoardT.
+
+       @param state The game state object.
+     */
     public BoardT(GameState state) {
-    	b = new ArrayList<>();
-    	this.state = state;
-    	for (int i = 0; i <SIZE; i++) {
-    		b.add(new ArrayList<Colour>());
-    		for (int j = 0; j < SIZE; j++)
-    			b.get(i).add(randomColour());
-    	}
+        b = new ArrayList<>();
+        this.state = state;
+        for (int i = 0; i <SIZE; i++) {
+            b.add(new ArrayList<Colour>());
+            for (int j = 0; j < SIZE; j++)
+                b.get(i).add(randomColour());
+        }
     }
 
     /**
@@ -80,7 +85,7 @@ public class BoardT {
 
     /**
        @brief updates the board after it has items have been consumed. Moves dots down if they have a null object below them and repopulates the board.
-     */
+    */
     public void updateBoard(){
         for (int i = SIZE - 2 ; i >= 0; i--)
             for (int j = SIZE - 1; j >=0; j--)
