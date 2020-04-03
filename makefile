@@ -1,6 +1,6 @@
 
 JFLAGS = -g
-JCLASS = -cp ./src:.:$(CLASSPATH):/usr/share/java/junit4-4.5.jar: # on mills
+JCLASS = -cp ./src:.:$(CLASSPATH):/usr/share/java/junit4-4.5.jar:./lib/junit-4.5.jar # on mills
 JC = javac
 JVM = java
 .SUFFIXES: .java .class
@@ -15,6 +15,10 @@ CLASSES = \
 	    src/me3/a4/StateScore.java \
 		  src/me3/a4/StateTime.java \
 			src/me3/a4/view/View.java \
+			src/me3/test/TestGameState.java \
+			src/me3/test/TestBoardT.java \
+			src/me3/test/AllTests.java \
+
 
 MAIN = AllTests
 
@@ -26,8 +30,8 @@ doc:
 	doxygen doxConfig
 	cd latex && $(MAKE)
 
-test: src/$(MAIN).class
-	$(JVM) $(JCLASS) org.junit.runner.JUnitCore $(MAIN)
+test: src/me3/test/$(MAIN).class
+	$(JVM) $(JCLASS) org.junit.runner.JUnitCore me3.test.$(MAIN)
 
 clean:
 	rm -rf html
