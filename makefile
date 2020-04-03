@@ -33,14 +33,14 @@ doc:
 test: src/me3/test/$(MAIN).class
 	$(JVM) $(JCLASS) org.junit.runner.JUnitCore me3.test.$(MAIN)
 
-run: src/me3/a4/Controller.java
-	$(JVM) $(JCLASS) me3.a4.Contoller
+run: src/me3/a4/Controller.class
+	$(JVM) $(JCLASS) me3.a4.Controller
 
 clean:
 	rm -rf html
 	rm -rf latex
-	cd src
-	find . -iname "*.class" -exec rm {} \;
+	find . -iname "*~" -delete
+	find . -type f -name "*.class" -delete
 	find . -type f -name '*.aux' -delete
 	find . -type f -name '*.fdb_latexmk' -delete
 	find . -type f -name '*.synctex.gz' -delete
