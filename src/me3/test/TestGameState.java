@@ -24,30 +24,28 @@ public class TestGameState {
 
     @Test
     public void timeLose(){
-        StateTime stateTime = new StateTime(5, 10);
-        while (true){
+        StateTime stateTime = new StateTime(1, 10);
+        while (stateTime.running()){
             stateTime.update();
-            if (!stateTime.running())
-                assertEquals(GameState.State.LOSE, stateTime.state());
         }
+        assertEquals(GameState.State.LOSE, stateTime.state());
     }
 
     @Test
     public void timeWin(){
-        StateTime stateTime = new StateTime(5, 10);
-        while (true){
+        StateTime stateTime = new StateTime(1, 10);
+        while (stateTime.running())
             stateTime.update(5, BoardT.Colour.RED);
-            if (!stateTime.running())
-                assertEquals(GameState.State.WIN, stateTime.state());
-        }
+        assertEquals(GameState.State.WIN, stateTime.state());
     }
 
     @Test
     public void timeTimer(){
-        StateTime stateTime = new StateTime(5, 10);
+        StateTime stateTime = new StateTime(1, 10);
         double curTime = System.currentTimeMillis();
-        double endTime = curTime + 5*1000;
+        double endTime = curTime + 1*1000;
         while (endTime > curTime){
+            curTime = System.currentTimeMillis();
             stateTime.update();
         }
         stateTime.update();
