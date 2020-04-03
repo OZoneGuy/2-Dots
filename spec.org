@@ -96,7 +96,7 @@ To start the game type the command ~make run~ from the project source, where the
 \newpage
 * Controller Module
   CLOSED: [2020-04-02 Thu 17:45]
-** Abstract Object Module
+** Module
    Controller
 ** Uses
    GameState, BoardT, View
@@ -134,7 +134,7 @@ To start the game type the command ~make run~ from the project source, where the
 \newpage
 * View Module
   CLOSED: [2020-04-01 Wed 21:01]
-** Abstract Object Module
+** Module
    View
 ** Uses
 
