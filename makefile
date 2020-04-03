@@ -27,11 +27,14 @@ default: classes
 classes: $(CLASSES:.java=.class)
 
 doc:
-	doxygen doxConfig
+	doxygen Doxyfile
 	cd latex && $(MAKE)
 
 test: src/me3/test/$(MAIN).class
 	$(JVM) $(JCLASS) org.junit.runner.JUnitCore me3.test.$(MAIN)
+
+run: src/me3/a4/Controller.java
+	$(JVM) $(JCLASS) me3.a4.Contoller
 
 clean:
 	rm -rf html
