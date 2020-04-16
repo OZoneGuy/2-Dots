@@ -192,7 +192,7 @@ public class View extends Frame{
 
         this.removeAll();
         this.add(panel);
-        this.addKeyListener(keyListener);
+        this.boardP.addKeyListener(keyListener);
         this.setVisible(true);
         boardP.paintComponents(this.getGraphics());
     }
@@ -239,7 +239,6 @@ public class View extends Frame{
 
         this.add(winP);
         this.setVisible(true);
-
     }
 
     /**
@@ -395,10 +394,10 @@ public class View extends Frame{
 
             // draw lines between dots
             g2d.setStroke(new BasicStroke((float)30.0, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            for (int i = 0; i < lines.size(); i++){
-                g2d.setColor(getColour(getNodeColour(lines.get(i).getP1())));
-                g2d.drawLine((int) lines.get(i).getP1().getX(), (int) lines.get(i).getP1().getY(),
-                             (int) lines.get(i).getP2().getX(), (int) lines.get(i).getP2().getY());
+            for (Line2D.Double line : lines) {
+                g2d.setColor(getColour(getNodeColour(line.getP1())));
+                g2d.drawLine((int) line.getP1().getX(), (int) line.getP1().getY(),
+                        (int) line.getP2().getX(), (int) line.getP2().getY());
             }
 
             // draw line to mouse
